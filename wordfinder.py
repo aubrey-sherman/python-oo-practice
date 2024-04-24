@@ -39,14 +39,15 @@ class SpecialWordFinder(WordFinder):
         characters
     """
 
-    def __init__(self, file_path):
-        """ Will create an object representing the file to be read and a
-            count property for the number of words read
-        """
-        super().__init__(file_path)
-        # print(self.formatted_word_list)
-        self.formatted_word_list = [item for item in
-                                    [
-                                        item for item in self.formatted_word_list
-                                        if item != ""] if item[0] != "#"
-                                    ]
+    # def __init__(self, file_path): NOTES: we don't need this, because this will look at parent's init
+    #     """ Will create an object representing the file to be read and a
+    #         count property for the number of words read
+    #     """
+    #     super().__init__(file_path)
+    #     # print(self.formatted_word_list)
+
+    def read_and_format(self, file_path):  # NOTES: the init will look at this on self
+        child_read_and_format = super().read_and_format(file_path)  # raw word list
+        return [item for item in child_read_and_format
+                if item != "" and item[0] != "#"
+                ]
